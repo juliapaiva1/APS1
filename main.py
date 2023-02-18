@@ -1,46 +1,82 @@
 import pygame
+import math
 
-pygame.init()
+x = 1200
+y = 720
 
-x=1200
-y=720
+fundo = pygame.image.load('6789.jpg')
+terra = pygame.image.load('terra.png')
+canhao = pygame.image.load('5332.png')
+canhao = pygame.transform.scale(canhao, (200, 200))
 
-screen = pygame.display.set_mode((x, y))
 pygame.display.set_caption('Astrobirds')
 
-fundo = pygame.image.load('6789.jpg').convert_alpha()
-fundo = pygame.transform.scale(fundo, (x,y))
+win = pygame.display.set_mode((x, y))
 
-terra = pygame.image.load('terra.png').convert_alpha()
-terra = pygame.transform.scale(terra, (300, 300))
+clock = pygame.time.Clock()
 
-canhao = pygame.image.load('1873.png').convert_alpha()
-canhao = pygame.transform.scale(canhao, (150, 150))
+gameover = False
 
-pos_canhao_x = -30
-pos_canhao_y = 450
 
-pos_terra_x = -30
-pos_terra_y = 500
+class Atirador(object):
+    def __init__(self):
+        self.img = canhao
+        self.largura = self.img.get_width()
+        self.altura = self.img.get_height()
+        self.x_canhao = 0
+        self.y_canhao = 350
+        self.angulo = 0
+        self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo) 
+        self.rotacao_retangulo = self.rotacao_superficie.get_rect()
+        self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao)
+        self.cosseno = math.cos(math.radians(self.angulo + 45))
+        self.seno = math.sin(math.radians(self.angulo + 45))
+        self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
 
-rodando = True
+    def desenha(self, win):
+        win.blit(self.img, [self.x_canhao, self.y_canhao, self.largura, self.altura])
+        win.blit(self.rotacao_superficie, self.rotacao_retangulo)
 
-angulo = 0
+    def gira_esquerda(self):
+        self.angulo += 5
+        self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo)
+        self.rotacao_retangulo = self.rotacao_superficie.get_rect()
+        self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao)
+        self.cosseno = math.cos(math.radians(self.angulo + 45))
+        self.seno = math.sin(math.radians(self.angulo + 45))
+        self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
 
-while rodando: 
-    angulo += 1
+    def gira_direita(self):
+        self.angulo -= 5
+        self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo)
+        self.rotacao_retangulo = self.rotacao_superficie.get_rect()
+        self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao)
+        self.cosseno = math.cos(math.radians(self.angulo + 45))
+        self.seno = math.sin(math.radians(self.angulo + 45))
+        self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
+
+
+
+def redesenha_tela():
+    win.blit(fundo, (0,0))
+    atirador.desenha(win)
+    pygame.display.update()
+
+atirador = Atirador()
+run = True
+while run:
+    clock.tick(60)
+    if not gameover:
+        teclas = pygame.key.get_pressed()
+        if teclas[pygame.K_LEFT]:
+            atirador.gira_esquerda()
+        if teclas[pygame.K_RIGHT]:
+            atirador.gira_direita()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            rodando = False
+            run = False
 
-        if event.type == pygame.KEYDOWN:
-            screen.blit(pygame.transform.rotate(canhao, angulo), (pos_canhao_x, pos_canhao_y))
-           
+    redesenha_tela()
 
-
-
-    screen.blit(fundo, (0, 0))
-    screen.blit(terra, (pos_terra_x, pos_terra_y))
-    screen.blit(canhao, (pos_canhao_x, pos_canhao_y))
-    pygame.display.flip()
-    pygame.display.update()
+pygame.quit()
