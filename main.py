@@ -23,37 +23,40 @@ class Atirador(object):
         self.img = canhao
         self.largura = self.img.get_width()
         self.altura = self.img.get_height()
-        self.x_canhao = 0
-        self.y_canhao = 350
+        self.x_canhao = 80
+        self.y_canhao = 450
         self.angulo = 0
         self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo) 
         self.rotacao_retangulo = self.rotacao_superficie.get_rect()
         self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao)
         self.cosseno = math.cos(math.radians(self.angulo + 45))
         self.seno = math.sin(math.radians(self.angulo + 45))
-        self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
+        #self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
 
     def desenha(self, win):
         win.blit(self.img, [self.x_canhao, self.y_canhao, self.largura, self.altura])
+        win.blit(fundo, (0, 0))
         win.blit(self.rotacao_superficie, self.rotacao_retangulo)
 
     def gira_esquerda(self):
-        self.angulo += 5
+        if self.angulo <55:
+            self.angulo += 5 
         self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo)
         self.rotacao_retangulo = self.rotacao_superficie.get_rect()
         self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao)
         self.cosseno = math.cos(math.radians(self.angulo + 45))
         self.seno = math.sin(math.radians(self.angulo + 45))
-        self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
+        #self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
 
     def gira_direita(self):
-        self.angulo -= 5
+        if self.angulo >-60:
+            self.angulo -= 5 
         self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo)
         self.rotacao_retangulo = self.rotacao_superficie.get_rect()
         self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao)
         self.cosseno = math.cos(math.radians(self.angulo + 45))
         self.seno = math.sin(math.radians(self.angulo + 45))
-        self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
+        #self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
 
 
 
