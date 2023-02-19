@@ -25,6 +25,10 @@ class Terra(object):
         self.x_terra = 80
         self.y_terra = 450
 
+    def desenha_terra(self):
+        win.blit(self.img_terra, [self.x_terra, self.y_terra, self.largura, self.altura])
+        pygame.display.update()
+
 class Atirador(object):
     def __init__(self):
         self.img = canhao
@@ -35,13 +39,21 @@ class Atirador(object):
         self.angulo = 0
         self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo) 
         self.rotacao_retangulo = self.rotacao_superficie.get_rect()
-        self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao)
+        self.rotacao_retangulo.center = (self.x_canhao, self.y_canhao) 
         self.cosseno = math.cos(math.radians(self.angulo + 45))
         self.seno = math.sin(math.radians(self.angulo + 45))
         self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
 
+    def terra(self):
+        self.img_terra = terra
+        self.largura_terra = self.img_terra.get_width()
+        self.altura_terra = self.img_terra.get_height()
+        self.x_terra = 80
+        self.y_terra = 450
+
     def desenha(self, win):
         #win.blit(terra.img_terra, [terra.x_terra, terra.y_terra, terra.largura, terra.altura])
+        #Terra.desenha_terra(self)
         win.blit(self.img, [self.x_canhao, self.y_canhao, self.largura, self.altura])
         win.blit(fundo, (0, 0))
         win.blit(self.rotacao_superficie, self.rotacao_retangulo)
