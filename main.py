@@ -19,23 +19,22 @@ gameover = False
 
 class Terra(object):
     def __init__(self):
-        self.img_terra = terra
-        self.largura = self.img_terra.get_width()
-        self.altura = self.img_terra.get_height()
-        self.x_terra = 80
-        self.y_terra = 450
-
-    def desenha_terra(self):
-        win.blit(self.img_terra, [self.x_terra, self.y_terra, self.largura, self.altura])
-        pygame.display.update()
+        self.img = terra
+        self.largura = self.img.get_width()
+        self.altura = self.img.get_height()
+        self.x = 20
+        self.y = 520
+    
+    def desenha(self):
+        win.blit(self.img, [self.x, self.y, self.largura, self.altura])
 
 class Atirador(object):
     def __init__(self):
         self.img = canhao
         self.largura = self.img.get_width()
         self.altura = self.img.get_height()
-        self.x_canhao = 80
-        self.y_canhao = 450
+        self.x_canhao = 150
+        self.y_canhao = 510
         self.angulo = 0
         self.rotacao_superficie = pygame.transform.rotate(self.img, self.angulo) 
         self.rotacao_retangulo = self.rotacao_superficie.get_rect()
@@ -44,20 +43,13 @@ class Atirador(object):
         self.seno = math.sin(math.radians(self.angulo + 45))
         self.direcao_tiro = (self.x_canhao + self.cosseno * self.largura//2, self.y_canhao - self.seno * self.altura//2)
 
-    def terra(self):
-        self.img_terra = terra
-        self.largura_terra = self.img_terra.get_width()
-        self.altura_terra = self.img_terra.get_height()
-        self.x_terra = 80
-        self.y_terra = 450
-
     def desenha(self, win):
-        #win.blit(terra.img_terra, [terra.x_terra, terra.y_terra, terra.largura, terra.altura])
-        #Terra.desenha_terra(self)
+        terra = Terra()
         win.blit(self.img, [self.x_canhao, self.y_canhao, self.largura, self.altura])
+        terra.desenha()
         win.blit(fundo, (0, 0))
         win.blit(self.rotacao_superficie, self.rotacao_retangulo)
-        #win.blit(terra.img_terra, [terra.x_terra, terra.y_terra, terra.largura, terra.altura])
+        terra.desenha()
 
     def gira_esquerda(self):
         if self.angulo <55:
@@ -83,7 +75,7 @@ class Raios(object):
     def __init__(self):
         self.mira = atirador.direcao_tiro
         self.x, self.y = self.mira
-        self.w = 50
+        self.w = 5
         self.h = 5
         self.cos = atirador.cosseno
         self.sen = atirador.seno
