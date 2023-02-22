@@ -9,12 +9,14 @@ class Game:
         self.qtdMeteoro = 10
         for i in range(self.qtdMeteoro):
             Meteoro()
-        self.earth = Planet(np.array([600, 360]), 50, "blue", 105000, "earth")
-        self.moon = Planet(np.array([900, 320]), 15, "red", 30000, "moon")
+        self.galaxy = pygame.transform.scale(pygame.image.load('assets/galaxy5.jpg'), (1200,720))
+        self.earth = Planet(np.array([600, 360]), 50, 105000, "earth", pygame.transform.scale(pygame.image.load('assets/earth.png'), (140,140)), 70)
+        self.moon = Planet(np.array([900, 320]), 15, 30000, "moon", pygame.transform.scale(pygame.image.load('assets/moon.png'), (42,42)), 20)
 
     def run(self,screen,status):
         self.getEvents(status)
         self.updatePos()
+        #screen.blit(self.galaxy, (0,0))
         screen.fill((0,0,0))
         Meteoro.draw(screen)            
         Raios.draw(screen)

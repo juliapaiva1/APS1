@@ -10,12 +10,16 @@ class Meteoro:
         self.s = Meteoro.setPos(self, pos)
         self.v = Meteoro.setSpeed(self, pos)
         self.radius = 8
+        self.sprite = pygame.transform.scale(pygame.image.load('assets/asteroide.png'), (20,20))
+        self.posDiscount = 11
+        self.blitPos = self.s - self.posDiscount
         Meteoro.all.append(self)
 
     @classmethod
     def draw(cls, screen):
         for met in Meteoro.all:
             pygame.draw.circle(screen, "green", met.s, met.radius, met.radius)
+            screen.blit(met.sprite, met.blitPos)
     
     def setPos(self, pos):
         match pos:
@@ -35,6 +39,7 @@ class Meteoro:
     def update(self, aceleracao):
         self.v = self.v + aceleracao
         self.s = self.s + 0.01 * self.v
+        self.blitPos = self.s - self.posDiscount
 
     def checkCollision(self, particula):
         for part in particula:

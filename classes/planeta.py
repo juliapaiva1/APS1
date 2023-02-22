@@ -5,19 +5,21 @@ import math
 class Planet:
     all = []
 
-    def __init__(self, pos, radius, color, gravConstant, name):
+    def __init__(self, pos, radius, gravConstant, name, sprite, posDiscount):
         self.s = pos
         self.radius = radius
-        self.color = color
         self.gravConstant = gravConstant
         self.name = name
         self.angle = 0
+        self.sprite = sprite
+        self.blitPos = self.s - posDiscount
+        self.posDiscount = posDiscount
         Planet.all.append(self)
     
     @classmethod
     def draw(cls, screen):
         for pla in Planet.all:
-            pygame.draw.circle(screen, pla.color, pla.s, pla.radius, pla.radius)
+            screen.blit(pla.sprite, pla.blitPos)
 
     def gravity(self, particle):
         direction_a = self.s - particle.s
@@ -30,4 +32,5 @@ class Planet:
     def update(self):
         self.s[0] = math.cos(self.angle) * 400 + 600
         self.s[1] = math.sin(self.angle) * 300 + 360
+        self.blitPos = self.s - self.posDiscount
         self.angle += 0.0025
