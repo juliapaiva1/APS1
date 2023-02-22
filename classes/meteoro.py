@@ -4,7 +4,7 @@ import random
 
 class Meteoro:
     all = []
-
+    
     def __init__(self):
         part = random.randint(1,2)
         self.s = Meteoro.setPos(self, part)

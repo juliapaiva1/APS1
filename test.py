@@ -15,7 +15,8 @@ qtdMeteoros = 10
 for i in range(qtdMeteoros):
     Meteoro()
 
-earth = Planet(np.array([600, 360]), 50)
+earth = Planet(np.array([600, 360]), 50, "blue", 100000, "earth")
+mars = Planet(np.array([1000, 220]), 15, "red", 10000, "mars")
 
 rodando = True
 while rodando:
@@ -31,14 +32,21 @@ while rodando:
 
     # Processar posicoes
     for met in Meteoro.all:
-        ac_earth = earth.gravity(100000, met)
-        ac = ac_earth
+        ac_earth = earth.gravity(met)
+        ac_mars = mars.gravity(met)
+        ac = ac_earth + ac_mars
         met.update(ac)
         met.checkCollision(Raios.all)
         met.checkCollision(Planet.all)
     
     for raio in Raios.all:
-        raio.update()
+        ac_mars = mars.gravity(raio)
+        ac = ac_mars
+        raio.update(ac)
+        raio.checkCollision([p for p in Planet.all if p.name != "earth"])
+
+    for planet in Planet.all:
+        planet.update()
 
     # Desenhar fundo
     screen.fill((0,0,0))
