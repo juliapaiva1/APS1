@@ -7,7 +7,7 @@ class Raios():
     def __init__(self, mouse):
         self.s = np.array([600,360])
         self.v = np.array([10,10])
-        self.direction = mouse
+        self.direction = (mouse - self.s) / np.linalg.norm(mouse - self.s) * 100
         self.radius = 5
         Raios.all.append(self)
 
@@ -17,11 +17,11 @@ class Raios():
             pygame.draw.circle(screen, "red", raio.s, raio.radius, raio.radius)
     
     def update(self, aceleracao):
-        v0 = self.direction - self.s
-        v0 = v0 / np.linalg.norm(v0) * 100
-        v0 = v0 + 3 * np.random.randn(2)
+        v0 = self.direction + 3 * np.random.randn(2)
         self.v = v0
         self.s = self.s + 0.1 * self.v + aceleracao
+        if self.s[0] < 0 or self.s[0] > 1200 or self.s[1] < 0 or self.s[1] > 720:
+            Raios.all.remove(self)
     
     def checkCollision(self, planets):
         for planet in planets:
