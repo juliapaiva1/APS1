@@ -24,8 +24,8 @@ class Meteoro:
     
     def setSpeed(self, pos):
         match pos:
-            case 1: return np.array([50, 20])
-            case 2: return np.array([-50, 20])
+            case 1: return np.array([20, 10])
+            case 2: return np.array([-20, 10])
 
     def resetPos(self):
         pos = random.randint(1,2)

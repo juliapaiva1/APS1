@@ -1,5 +1,6 @@
 import numpy as np
 import pygame
+import math
 
 class Planet:
     all = []
@@ -10,6 +11,7 @@ class Planet:
         self.color = color
         self.gravConstant = gravConstant
         self.name = name
+        self.angle = 0
         Planet.all.append(self)
     
     @classmethod
@@ -17,14 +19,15 @@ class Planet:
         for pla in Planet.all:
             pygame.draw.circle(screen, pla.color, pla.s, pla.radius, pla.radius)
 
-    def gravity(self, particula):
-        direcao_a = self.s - particula.s
-        d = np.linalg.norm(direcao_a)
-        direcao_a = direcao_a / d
+    def gravity(self, particle):
+        direction_a = self.s - particle.s
+        d = np.linalg.norm(direction_a)
+        direction_a = direction_a / d
         mag_a = self.gravConstant / d**2
-        a = direcao_a * mag_a
+        a = direction_a * mag_a
         return a
 
     def update(self):
-        pass
-
+        self.s[0] = math.cos(self.angle) * 400 + 600
+        self.s[1] = math.sin(self.angle) * 300 + 360
+        self.angle += 0.0025

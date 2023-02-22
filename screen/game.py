@@ -9,8 +9,8 @@ class Game:
         self.qtdMeteoro = 10
         for i in range(self.qtdMeteoro):
             Meteoro()
-        self.earth = Planet(np.array([600, 360]), 50, "blue", 100000, "earth")
-        self.mars = Planet(np.array([1000, 220]), 15, "red", 10000, "mars")
+        self.earth = Planet(np.array([600, 360]), 50, "blue", 105000, "earth")
+        self.moon = Planet(np.array([900, 320]), 15, "red", 30000, "moon")
 
     def run(self,screen,status):
         self.getEvents(status)
@@ -30,19 +30,19 @@ class Game:
     def updatePos(self):
         for met in Meteoro.all:
             ac_earth = self.earth.gravity(met)
-            ac_mars = self.mars.gravity(met)
-            ac = ac_earth + ac_mars
+            ac_moon = self.moon.gravity(met)
+            ac = ac_earth + ac_moon
             met.update(ac)
             met.checkCollision(Raios.all)
             met.checkCollision(Planet.all)
         
         for raio in Raios.all:
-            ac_mars = self.mars.gravity(raio)
-            ac = ac_mars
+            ac_moon = self.moon.gravity(raio)
+            ac = ac_moon
             raio.update(ac)
             raio.checkCollision([p for p in Planet.all if p.name != "earth"])
 
-        for planet in Planet.all:
+        for planet in [p for p in Planet.all if p.name != "earth"]:
             planet.update()
 
     
