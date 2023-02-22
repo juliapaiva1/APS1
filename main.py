@@ -2,9 +2,9 @@ import pygame
 import math
 
 #carrega mídias utilizadas, inicializa tela e aplicação
-fundo = pygame.image.load('6789.jpg')
-terra = pygame.image.load('terra.png')
-canhao = pygame.image.load('5332.png')
+fundo = pygame.image.load('assets/6789.jpg')
+terra = pygame.image.load('assets/terra.png')
+canhao = pygame.image.load('assets/5332.png')
 canhao = pygame.transform.scale(canhao, (200, 200))
 
 pygame.display.set_caption('Astrobirds')
@@ -113,7 +113,6 @@ while run:
     if not gameover:
         for raio in raios:
             raio.percurso()
-
         teclas = pygame.key.get_pressed()
         if teclas[pygame.K_LEFT]:
             atirador.gira_esquerda()
