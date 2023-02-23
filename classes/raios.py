@@ -25,8 +25,9 @@ class Raios():
         for planet in planets:
             if np.linalg.norm(self.s - planet.s) <= planet.radius + self.radius:
                 Raios.all.remove(self)
-                
+
         if self.s[0] < 0 or self.s[0] > 1200 or self.s[1] < 0 or self.s[1] > 720:
             Raios.all.remove(self)
+    
         
         

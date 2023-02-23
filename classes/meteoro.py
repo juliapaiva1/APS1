@@ -41,7 +41,13 @@ class Meteoro:
         self.s = self.s + 0.01 * self.v
         self.blitPos = self.s - self.posDiscount
 
-    def checkCollision(self, particula):
+    def checkCollisionP(self, particula):
         for part in particula:
             if np.linalg.norm(self.s - part.s) <= part.radius + self.radius:
                 self.resetPos()
+    
+    def checkCollisionR(self, raios, status):
+        for raio in raios:
+            if np.linalg.norm(self.s - raio.s) <= raio.radius + self.radius:
+                self.resetPos()
+                status["destroyedMeteor"] += 1

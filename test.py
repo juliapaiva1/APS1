@@ -18,7 +18,9 @@ window = {
 
 status = {
     "current": "start",
-    "running": True
+    "running": True,
+    "destroyedMeteor": 0,
+    "life": 3,
 }
 
 while status["running"]:
