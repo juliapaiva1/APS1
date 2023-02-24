@@ -14,5 +14,6 @@ def default():
         "running": True,
         "destroyedMeteor": 0,
         "life": 3,
+        "wave": 1,
     }
     return window, status

@@ -6,19 +6,23 @@ from classes.planeta import Planet
 
 class Game:
     def __init__(self):
-        self.qtdMeteoro = 10
-        for i in range(self.qtdMeteoro):
-            Meteoro()
         self.font = pygame.font.Font(None, 50)
         self.galaxy = pygame.transform.scale(pygame.image.load('assets/galaxy5.jpg'), (1200,720))
         self.earth = Planet(np.array([600, 360]), 50, 105000, "earth", pygame.transform.scale(pygame.image.load('assets/earth.png'), (140,140)), 70)
         self.moon = Planet(np.array([900, 320]), 15, 30000, "moon", pygame.transform.scale(pygame.image.load('assets/moon.png'), (42,42)), 20)
+        self.currentTime = 0
+        self.waveStart = 0
+        self.qtdMeteoro = 10
+        for i in range(self.qtdMeteoro):
+            Meteoro()
 
     def run(self,screen,status,window):
+        self.wave(status)        
+
         self.checkgame(status)
         self.getEvents(status)
         self.updatePos(status)
-        #screen.blit(self.galaxy, (0,0))
+        
         screen.fill((0,0,0))
         Meteoro.draw(screen)            
         Raios.draw(screen)
@@ -56,8 +60,18 @@ class Game:
     
     def draw(self, screen, status):
         destroyedMeteor = self.font.render(str(status["destroyedMeteor"]), False, (255,255,255))
+        waveCount = self.font.render("Wave: "+str(status["wave"]), False, (255,255,255))
         screen.blit(destroyedMeteor, (5,5))
+        screen.blit(waveCount, (50,5))
 
+
+    def wave(self,status):
+        self.currentTime = pygame.time.get_ticks()
+        if self.currentTime - self.waveStart > 30000:
+            self.waveStart = pygame.time.get_ticks()
+            status["wave"] += 1
+            for i in range(5):
+                Meteoro()
     
 
     
