@@ -21,6 +21,7 @@ class Game:
         self.lastWaveStart = 0
         self.status = status
         self.screen = screen
+        self.vida = pygame.transform.scale(pygame.image.load('assets/vidas.png'), (50, 50))
 
     def run(self, window):
         self.wave()        
@@ -65,12 +66,22 @@ class Game:
                 self.status["gameDuration"] = f'{(time/1000):.1f} segundos'
             else: 
                 self.status["gameDuration"] = f'{(time/60000):.2f} minutos'
+
+    def lives(self, x, y, lives, img):
+        for i in range(lives):
+            img_rect = img.get_rect()
+            img_rect.x = x + 30 * i
+            img_rect.y = y
+            self.screen.blit(img, img_rect)
     
     def draw(self):
         destroyedMeteor = self.font.render(str(self.status["destroyedMeteor"]), False, (255,255,255))
         waveCount = self.font1.render("Wave: "+str(self.status["wave"]), False, (255,255,255))
+        vidas = self.font1.render("Vidas:", False, (255,255,255))
         self.screen.blit(destroyedMeteor,(10,5))
         self.screen.blit(waveCount,(85,14))
+        self.screen.blit(vidas,(340,14))
+        self.lives(400, 3, self.status["life"], self.vida)
 
     def wave(self):
         self.currentTime = pygame.time.get_ticks()
