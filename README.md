@@ -16,3 +16,6 @@ Dupla: Alexandre Magno e Júlia Paiva
 
 # 3. Modelos físicos utilizados
 
+# 4. GIF do jogo
+
+![alt-text](https://github.com/juliapaiva1/Astrobirds/blob/main/gif.gif)
