@@ -1,5 +1,6 @@
 import pygame
-from classes.default import *
+from screen.game import Game
+from classes.default import defaultStatus
 
 class Death:
     def __init__(self, status, screen):
@@ -17,16 +18,14 @@ class Death:
             if event.type == pygame.QUIT:
                 self.status["running"] = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                self.status["current"] = "start"
-                self.status["life"] = 3
-                self.status["destroyedMeteor"] = 0
+                defaultStatus(self.status)
                 window["game"] = Game(self.status, self.screen) 
     
     def update(self):
         self.screen.fill((0,0,0))
         title = self.font.render('AstroBirds', False, (255, 255, 255))
         score = self.font1.render(f'Seu score foi: {self.status["destroyedMeteor"]}', False, (255, 255, 255))
-        time = self.font1.render(self.status["gameDuration"], False, (255, 255, 255))
+        time = self.font1.render(str(self.status["gameDuration"]), False, (255, 255, 255))
         self.screen.blit(title,(300,360))
         self.screen.blit(score,(300,450))
         self.screen.blit(time,(300,560))
