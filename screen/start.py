@@ -16,6 +16,7 @@ class Start:
                 self.status["running"] = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.status["current"] = "game"
+                self.status["gameDuration"] = pygame.time.get_ticks()
     
     def update(self):
         self.screen.fill((0,0,0))
