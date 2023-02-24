@@ -10,11 +10,11 @@ screen = pygame.display.set_mode((size))
 clock = pygame.time.Clock()
 FPS = 60  # Frames per Second
 
-window, status = default()
+window, status = default(screen)
 
 while status["running"]:
     clock.tick(FPS)
-    window[status["current"]].run(screen,status,window)
+    window[status["current"]].run(window)
     pygame.display.update()
 
 # Terminar tela

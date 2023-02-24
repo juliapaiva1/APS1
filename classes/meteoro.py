@@ -2,7 +2,7 @@ import numpy as np
 import pygame
 import random
 
-class Meteoro:
+class Meteoro():
     all = []
 
     def __init__(self):

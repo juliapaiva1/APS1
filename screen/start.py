@@ -1,23 +1,25 @@
 import pygame
 
 class Start:
-    def __init__(self):
+    def __init__(self, status, screen):
         self.my_font = pygame.font.Font(None, 100)
+        self.status = status
+        self.screen = screen
 
-    def run(self,screen,status, window):
-        self.update(screen)
-        self.getEvents(status)
+    def run(self, window):
+        self.update()
+        self.getEvents()
 
-    def getEvents(self,status):
+    def getEvents(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                status["running"] = False
+                self.status["running"] = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                status["current"] = "game"
+                self.status["current"] = "game"
     
-    def update(self, screen):
-        screen.fill((0,0,0))
+    def update(self):
+        self.screen.fill((0,0,0))
         title = self.my_font.render('AstroBirds', False, (255, 255, 255))
         play = self.my_font.render('Clique para jogar!', False, (255, 255, 255))
-        screen.blit(title,(300,360))
-        screen.blit(play,(300,450))
+        self.screen.blit(title,(300,360))
+        self.screen.blit(play,(300,450))
