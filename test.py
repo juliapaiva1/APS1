@@ -1,6 +1,10 @@
 import pygame
 import numpy as np
-from classes.default import default
+from classes.default import defaultStatus
+from screen.game import Game
+from screen.start import Start
+from screen.death import Death
+from screen.instructions import Instructions
 
 pygame.init()
 
@@ -10,7 +14,14 @@ screen = pygame.display.set_mode((size))
 clock = pygame.time.Clock()
 FPS = 60  # Frames per Second
 
-window, status = default(screen)
+status = defaultStatus({})
+
+window = {
+    "start": Start(status,screen),
+    "game": Game(status,screen),
+    "death": Death(status,screen),
+    "instructions": Instructions(status, screen)
+}  
 
 while status["running"]:
     clock.tick(FPS)
