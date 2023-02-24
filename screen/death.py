@@ -3,7 +3,8 @@ from classes.default import *
 
 class Death:
     def __init__(self, status, screen):
-        self.my_font = pygame.font.Font(None, 100)
+        self.font = pygame.font.Font(None, 100)
+        self.font1 = pygame.font.Font(None, 30)
         self.status = status
         self.screen = screen
 
@@ -19,11 +20,13 @@ class Death:
                 self.status["current"] = "start"
                 self.status["life"] = 3
                 self.status["destroyedMeteor"] = 0
-                #window["game"] = Game(status, screen) 
+                window["game"] = Game(self.status, self.screen) 
     
     def update(self):
         self.screen.fill((0,0,0))
-        title = self.my_font.render('AstroBirds', False, (255, 255, 255))
-        score = self.my_font.render(f'Seu score foi: {self.status["destroyedMeteor"]}', False, (255, 255, 255))
+        title = self.font.render('AstroBirds', False, (255, 255, 255))
+        score = self.font1.render(f'Seu score foi: {self.status["destroyedMeteor"]}', False, (255, 255, 255))
+        time = self.font1.render(self.status["gameDuration"], False, (255, 255, 255))
         self.screen.blit(title,(300,360))
         self.screen.blit(score,(300,450))
+        self.screen.blit(time,(300,560))

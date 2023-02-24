@@ -6,6 +6,9 @@ from classes.planeta import Planet
 
 class Game:
     def __init__(self, status, screen):
+        Meteoro.all = []
+        Planet.all = []
+        Raios.all = []
         self.qtdMeteoro = 10
         for i in range(self.qtdMeteoro):
             Meteoro()
@@ -15,7 +18,7 @@ class Game:
         self.earth = Planet(np.array([600, 360]), 50, 105000, "earth", pygame.transform.scale(pygame.image.load('assets/earth.png'), (140,140)), 70)
         self.moon = Planet(np.array([900, 320]), 15, -15000, "moon", pygame.transform.scale(pygame.image.load('assets/moon.png'), (42,42)), 20)
         self.currentTime = 0
-        self.waveStart = 0
+        self.lastWaveStart = 0
         self.status = status
         self.screen = screen
 
@@ -50,14 +53,18 @@ class Game:
             ac_moon = self.moon.gravity(raio)
             ac = ac_moon
             raio.update(ac)
-            #raio.checkCollision([p for p in Planet.all if p.name != "earth"])
 
         for planet in [p for p in Planet.all if p.name != "earth"]:
             planet.update()
     
     def checkgame(self):
         if self.status["life"] == 0:
-           self. status["current"] = "death"
+            self.status["current"] = "death"
+            time = self.currentTime - self.status["gameDuration"]
+            if time/60000 < 1:
+                self.status["gameDuration"] = f'{(time/1000):.1f} segundos'
+            else: 
+                self.status["gameDuration"] = f'{(time/60000):.2f} minutos'
     
     def draw(self):
         destroyedMeteor = self.font.render(str(self.status["destroyedMeteor"]), False, (255,255,255))
@@ -67,8 +74,8 @@ class Game:
 
     def wave(self):
         self.currentTime = pygame.time.get_ticks()
-        if self.currentTime - self.waveStart > 20000:
-            self.waveStart = pygame.time.get_ticks()
+        if self.currentTime - self.lastWaveStart > 20000:
+            self.lastWaveStart = pygame.time.get_ticks()
             self.status["wave"] += 1
             for i in range(2):
                 Meteoro()

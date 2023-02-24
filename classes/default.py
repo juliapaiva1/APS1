@@ -7,8 +7,9 @@ def default(screen):
         "current": "start",
         "running": True,
         "destroyedMeteor": 0,
-        "life": 3,
+        "life": 5,
         "wave": 1,
+        "gameDuration": 0,
     }
 
     window = {
