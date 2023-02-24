@@ -1,6 +1,7 @@
 from screen.game import Game
 from screen.start import Start
 from screen.death import Death
+from screen.instructions import Instructions
 
 def default(screen):
     status = {
@@ -16,5 +17,6 @@ def default(screen):
         "start": Start(status,screen),
         "game": Game(status,screen),
         "death": Death(status,screen),
+        "instructions": Instructions(status, screen)
     }  
     return window, status
