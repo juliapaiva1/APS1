@@ -4,7 +4,7 @@ class Start:
     def __init__(self):
         self.my_font = pygame.font.Font(None, 100)
 
-    def run(self,screen,status):
+    def run(self,screen,status, window):
         self.update(screen)
         self.getEvents(status)
 

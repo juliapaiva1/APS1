@@ -14,7 +14,8 @@ class Game:
         self.earth = Planet(np.array([600, 360]), 50, 105000, "earth", pygame.transform.scale(pygame.image.load('assets/earth.png'), (140,140)), 70)
         self.moon = Planet(np.array([900, 320]), 15, 30000, "moon", pygame.transform.scale(pygame.image.load('assets/moon.png'), (42,42)), 20)
 
-    def run(self,screen,status):
+    def run(self,screen,status,window):
+        self.checkgame(status)
         self.getEvents(status)
         self.updatePos(status)
         #screen.blit(self.galaxy, (0,0))
@@ -38,7 +39,7 @@ class Game:
             ac = ac_earth + ac_moon
             met.update(ac)
             met.checkCollisionR(Raios.all, status)
-            met.checkCollisionP(Planet.all)
+            met.checkCollisionP(Planet.all, status)
         
         for raio in Raios.all:
             ac_moon = self.moon.gravity(raio)
