@@ -12,10 +12,10 @@ Dupla: Alexandre Magno e Júlia Paiva
 
 # 2. Como jogar?
 
-1. Uma iminente chuva de meteoros está proxima de atingir a Terra;
-2. Utilize o ponteiro para atirar na direção dos asteroides verdes que aparecem na tela;
-3. Você tem 5 vidas, cada vez que for atingido por um asteroide perde uma;
-4. Próximo à Terra há um satélite vermelho. Ele possui uma antigravidade que afasta os meteoros, portanto esse pode ser seu maior aliado;
+Uma iminente chuva de meteoros está proxima de atingir a Terra, portanto:
+1. Utilize o ponteiro para atirar na direção dos asteroides verdes que aparecem na tela;
+2. Você terá 5 vidas, cada vez que for atingido por um asteroide perde uma;
+3. Próximo à Terra há um satélite vermelho. Ele possui antigravidade que afasta os meteoros, portanto esse pode ser seu maior aliado;
 * Utilizar um mouse é o mais recomendado para o Astrobirds.
 
 # 3. Modelos físicos utilizados
