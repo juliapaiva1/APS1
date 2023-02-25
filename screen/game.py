@@ -15,17 +15,12 @@ class Game:
         self.qtdMeteoro = 8
         for i in range(self.qtdMeteoro):
             Meteoro()
-        self.font = pygame.font.Font(None, 50)
-        self.font1 = pygame.font.Font(None, 30)
-        self.galaxy = pygame.transform.scale(pygame.image.load('assets/galaxy5.jpg'), (1200,720))
+        self.font, self.font1 = pygame.font.Font(None, 50), pygame.font.Font(None, 30)
         self.vida = pygame.transform.scale(pygame.image.load('assets/vidas.png'), (50, 50))
         self.earth = Planet(np.array([600, 360]), 50, 24000, "earth", pygame.transform.scale(pygame.image.load('assets/earth.png'), (140,140)), 70)
         self.moon = Planet(np.array([900, 320]), 15, -5000, "moon", pygame.transform.scale(pygame.image.load('assets/moon.png'), (42,42)), 20)
-        self.currentTime = 0
-        self.lastWaveStart = 0
-        self.textDestroyedMeteor = ''
-        self.textWaveCount = ''
-        self.textVidas = ''
+        self.currentTime, self.lastWaveStart = 0, status["gameStart"]
+        self.textDestroyedMeteor, self.textWaveCount, self.textVidas = '','',''
         self.status = status
         self.screen = screen
 
@@ -74,7 +69,7 @@ class Game:
         '''
         if self.status["life"] == 0:
             self.status["current"] = "death"
-            time = self.currentTime - self.status["gameDuration"]
+            time = self.currentTime - self.status["gameStart"]
             if time/60000 < 1:
                 self.status["gameDuration"] = f'{(time/1000):.1f} segundos'
             else: 
