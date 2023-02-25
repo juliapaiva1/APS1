@@ -12,7 +12,7 @@ pygame.init()
 size = np.array([1200,720])
 screen = pygame.display.set_mode((size))
 clock = pygame.time.Clock()
-FPS = 60  # Frames per Second
+FPS = 120  # Frames per Second
 
 status = defaultStatus({})
 
