@@ -17,7 +17,7 @@ class Death:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.status["running"] = False
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 defaultStatus(self.status)
                 window["game"] = Game(self.status, self.screen) 
     

@@ -9,7 +9,7 @@ class Game:
         Meteoro.all = []
         Planet.all = []
         Raios.all = []
-        self.qtdMeteoro = 10
+        self.qtdMeteoro = 8
         for i in range(self.qtdMeteoro):
             Meteoro()
         self.font = pygame.font.Font(None, 50)
@@ -67,12 +67,12 @@ class Game:
             else: 
                 self.status["gameDuration"] = f'{(time/60000):.2f} minutos'
 
-    def lives(self, x, y, lives, img):
-        for i in range(lives):
-            img_rect = img.get_rect()
+    def lives(self, x, y):
+        for i in range(self.status["life"]):
+            img_rect = self.vida.get_rect()
             img_rect.x = x + 30 * i
             img_rect.y = y
-            self.screen.blit(img, img_rect)
+            self.screen.blit(self.vida, img_rect)
     
     def draw(self):
         destroyedMeteor = self.font.render(str(self.status["destroyedMeteor"]), False, (255,255,255))
@@ -81,7 +81,7 @@ class Game:
         self.screen.blit(destroyedMeteor,(10,5))
         self.screen.blit(waveCount,(85,14))
         self.screen.blit(vidas,(340,14))
-        self.lives(400, 3, self.status["life"], self.vida)
+        self.lives(400, 3)
 
     def wave(self):
         self.currentTime = pygame.time.get_ticks()
