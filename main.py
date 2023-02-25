@@ -14,13 +14,15 @@ screen = pygame.display.set_mode((size))
 clock = pygame.time.Clock()
 FPS = 120  # Frames per Second
 
+# Definicoes para basicas para o jogo
 status = defaultStatus({})
 
+# Hub para as telas 
 window = {
     "start": Start(status,screen),
+    "instructions": Instructions(status, screen),
     "game": Game(status,screen),
-    "death": Death(status,screen),
-    "instructions": Instructions(status, screen)
+    "death": Death(status,screen)
 }  
 
 while status["running"]:

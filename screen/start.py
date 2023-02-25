@@ -1,6 +1,8 @@
 import pygame
 
 class Start:
+    ''' Classe que renderiza a tela inicial. Apenas recebe eventos para redirecionar o jogo ou para instruções.'''
+
     def __init__(self, status, screen):
         self.background = pygame.image.load('assets/Astrobirds.png')
         self.status = status
@@ -9,6 +11,7 @@ class Start:
         self.instructionBtn = pygame.Rect((435, 510), (330,60))
 
     def run(self, window):
+        '''Faz a chamada de todas as funcoes necessarias para renderizar a essa tela.'''
         self.draw()
         self.getEvents()
 

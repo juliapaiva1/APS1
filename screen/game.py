@@ -5,34 +5,40 @@ from classes.raios import Raios
 from classes.planeta import Planet
 
 class Game:
+    ''' Classe que renderiza a tela de jogo.'''
+
     def __init__(self, status, screen):
-        Meteoro.all = []
-        Planet.all = []
-        Raios.all = []
+        '''Gera os meteoros e planetas, carrega os assets, e inicia as variaveis necessarias.'''
+        Meteoro.clear()
+        Planet.clear()
+        Raios.clear()
         self.qtdMeteoro = 8
         for i in range(self.qtdMeteoro):
             Meteoro()
         self.font = pygame.font.Font(None, 50)
         self.font1 = pygame.font.Font(None, 30)
         self.galaxy = pygame.transform.scale(pygame.image.load('assets/galaxy5.jpg'), (1200,720))
+        self.vida = pygame.transform.scale(pygame.image.load('assets/vidas.png'), (50, 50))
         self.earth = Planet(np.array([600, 360]), 50, 24000, "earth", pygame.transform.scale(pygame.image.load('assets/earth.png'), (140,140)), 70)
         self.moon = Planet(np.array([900, 320]), 15, -5000, "moon", pygame.transform.scale(pygame.image.load('assets/moon.png'), (42,42)), 20)
         self.currentTime = 0
         self.lastWaveStart = 0
+        self.textDestroyedMeteor = ''
+        self.textWaveCount = ''
+        self.textVidas = ''
         self.status = status
         self.screen = screen
-        self.vida = pygame.transform.scale(pygame.image.load('assets/vidas.png'), (50, 50))
 
     def run(self, window):
+        '''Faz a chamada de todas as funcoes necessarias para renderizar a essa tela.'''
         self.wave()        
         self.checkgame()
         self.getEvents()
         self.updatePos()
-        self.screen.fill((0,0,0))
+        self.draw()
         Meteoro.draw(self.screen)            
         Raios.draw(self.screen)
         Planet.draw(self.screen)
-        self.draw()
     
     def getEvents(self):
         for event in pygame.event.get():
@@ -42,6 +48,9 @@ class Game:
                 Raios(pygame.mouse.get_pos())
 
     def updatePos(self):
+        ''' Passa por todas as particulas renderizadas: 
+        Atualiza a resultante de aceleração e verifica colisões entre objetos.
+        '''
         for met in Meteoro.all:
             ac_earth = self.earth.gravity(met)
             ac_moon = self.moon.gravity(met)
@@ -60,6 +69,9 @@ class Game:
             planet.update()
     
     def checkgame(self):
+        '''Verifica se o player ficou sem vidas. 
+        Aponta o status para a tela seguinte e calcula o tempo de jogo.
+        '''
         if self.status["life"] == 0:
             self.status["current"] = "death"
             time = self.currentTime - self.status["gameDuration"]
@@ -67,24 +79,32 @@ class Game:
                 self.status["gameDuration"] = f'{(time/1000):.1f} segundos'
             else: 
                 self.status["gameDuration"] = f'{(time/60000):.2f} minutos'
+    
+    def draw(self):
+        '''Desenha na tela os indicadores de game status.'''
+        self.textRender()
+        self.screen.fill((0,0,0))
+        self.screen.blit(self.textDestroyedMeteor,(10,5))
+        self.screen.blit(self.textWaveCount,(85,14))
+        self.screen.blit(self.textVidas,(340,14))
+        self.lives(400, 3)
+    
+    def textRender(self):
+        '''Renderiza os indicadores de quantidade de meteoros destruidos, wave atual e vidas.'''
+        self.textDestroyedMeteor = self.font.render(str(self.status["destroyedMeteor"]), False, (255,255,255))
+        self.textWaveCount = self.font1.render("Wave: "+str(self.status["wave"]), False, (255,255,255))
+        self.textVidas = self.font1.render("Vidas:", False, (255,255,255))
 
     def lives(self, x, y):
+        '''De acordo com a quantidade de vidas, renderiza os coracoes na tela.'''
         for i in range(self.status["life"]):
             img_rect = self.vida.get_rect()
             img_rect.x = x + 30 * i
             img_rect.y = y
             self.screen.blit(self.vida, img_rect)
-    
-    def draw(self):
-        destroyedMeteor = self.font.render(str(self.status["destroyedMeteor"]), False, (255,255,255))
-        waveCount = self.font1.render("Wave: "+str(self.status["wave"]), False, (255,255,255))
-        vidas = self.font1.render("Vidas:", False, (255,255,255))
-        self.screen.blit(destroyedMeteor,(10,5))
-        self.screen.blit(waveCount,(85,14))
-        self.screen.blit(vidas,(340,14))
-        self.lives(400, 3)
 
     def wave(self):
+        '''Calcula delta de tempo entre waves para atualizar a quantidade de asteroides na tela.'''
         self.currentTime = pygame.time.get_ticks()
         if self.currentTime - self.lastWaveStart > 20000:
             self.lastWaveStart = pygame.time.get_ticks()
