@@ -1,20 +1,27 @@
-# APS1 - Astrobirds
+# Astrobirds
 
 Dupla: Alexandre Magno e Júlia Paiva
 
 # 1. Como rodar?
 
-1. No repositório do github do projeto, vá no botão verde escrito "Code" e selecione a opção de "download zip";
-2. Extraia o conteúdo do zip para uma pasta no seu computador;
-3. Abra essa pasta em um editor de código e execute o arquivo "test.py".
+1. Inicialmente, é necessário ter a versão 3.10 ou superior do Python. [Guia para download/update](https://www.geeksforgeeks.org/how-to-update-python-on-windows/);
+2. Neste repositório do github do projeto, clique no botão verde "Code" e selecione a opção de "download zip";
+3. Extraia o conteúdo do zip para uma pasta no seu computador;
+4. Abra um terminal na pasta e execute o comando "pip install requirements.txt" para instalar as bibliotecas necessárias;
+5. Abra essa pasta em um editor de código e execute o arquivo "main.py".
 
 # 2. Como jogar?
 
-1. Use o mouse para atirar na direção dos asteroides verdes que aparecem na tela;
-2. Você tem 5 vidas, e cada vez que for atingido por um asteroide verde, perde uma;
-3. Não é necessário atirar em direção à lua vermelha. Ela não é destrutiva e afasta os asteroides por onde passa.
+1. Uma iminente chuva de meteoros está proxima de atingir a Terra;
+2. Utilize o ponteiro para atirar na direção dos asteroides verdes que aparecem na tela;
+3. Você tem 5 vidas, cada vez que for atingido por um asteroide perde uma;
+4. Próximo à Terra há um satélite vermelho. Ele possui uma antigravidade que afasta os meteoros, portanto esse pode ser seu maior aliado;
+* Utilizar um mouse é o mais recomendado para o Astrobirds.
 
 # 3. Modelos físicos utilizados
+
+   Em Astrobirds utilizamos conceitos Mecânica Classica, especificamente Cinemática e Gravitação Universal, com o intuíto de criar um ambiente que simulasse o espaço dentro do jogo. Como base para o calculo da movimentação dos disparos, planetas e asteorides, a Cinemática atuou por meio de Movimento Uniformemente Variado para determinar as novas velocidades e posições desses objetos frame a frame. Isso ocorreu, de acordo com formulas adaptadas, partindo de: V = V0 + a * t, S = S0 + V0 * t + (a * t^2)/2.
+   Contudo, o principal recurso de Astrobirds é a simulação de gravidade que atrai e repele os objetos, alterando a resultante de aceleração de cada um deles a partir de uma formula adaptada de Gravitação Universal baseada em: g = (G * M)/d^2 
 
 # 4. GIF do jogo
 
