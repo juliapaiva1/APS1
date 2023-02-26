@@ -5,7 +5,7 @@ from classes.raios import Raios
 from classes.planeta import Planet
 
 class Game:
-    ''' Classe que renderiza a tela de jogo.'''
+    '''Classe que renderiza a tela de jogo.'''
 
     def __init__(self, status, screen):
         '''Gera os meteoros e planetas, carrega os assets, e inicia as variaveis necessarias.'''

@@ -7,7 +7,7 @@ class Instructions:
         self.status = status
         self.screen = screen
         self.background = pygame.image.load("assets/instrucoes.png")
-        self.playBtn = pygame.Rect((450, 550), (270,60))
+        self.playBtn = pygame.Rect((470, 600), (270,60))
 
     def run(self, window):
         '''Faz a chamada de todas as funcoes necessarias para renderizar a essa tela.'''

@@ -1,14 +1,13 @@
 import pygame
 import numpy as np
 from classes.default import defaultStatus
-from screen.game import Game
-from screen.start import Start
-from screen.death import Death
-from screen.instructions import Instructions
+from screens.game import Game
+from screens.start import Start
+from screens.death import Death
+from screens.instructions import Instructions
 
 pygame.init()
 
-# Tamanho da tela e definição do FPS
 size = np.array([1200,720])
 screen = pygame.display.set_mode((size))
 clock = pygame.time.Clock()
@@ -30,5 +29,4 @@ while status["running"]:
     window[status["current"]].run(window)
     pygame.display.update()
 
-# Terminar tela
 pygame.quit()

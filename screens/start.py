@@ -1,5 +1,5 @@
 import pygame
-from screen.game import Game
+from screens.game import Game
 
 class Start:
     ''' Classe que renderiza a tela inicial. Apenas recebe eventos para redirecionar o jogo ou para instruções.'''
