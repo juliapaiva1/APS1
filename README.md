@@ -7,7 +7,7 @@ Por: Alexandre Magno e Júlia Paiva
 1. Inicialmente, é necessário ter a versão 3.10 ou superior do Python. [Guia para download/update](https://www.geeksforgeeks.org/how-to-update-python-on-windows/);
 2. Neste repositório do github do projeto, clique no botão verde "Code" e selecione a opção de "download zip";
 3. Extraia o conteúdo do zip para uma pasta no seu computador;
-4. Abra um terminal na pasta e execute o comando "pip install requirements.txt" para instalar as bibliotecas necessárias;
+4. Abra um terminal na pasta e execute o comando "pip install -r requirements.txt" para instalar as bibliotecas necessárias;
 5. Abra essa pasta em um editor de código e execute o arquivo "main.py".
 
 # 2. Como jogar?
