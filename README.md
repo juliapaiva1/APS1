@@ -25,4 +25,4 @@ Uma iminente chuva de meteoros está proxima de atingir a Terra, portanto:
 
 # 4. GIF do jogo
 
-![alt-text](https://github.com/juliapaiva1/Astrobirds/blob/main/gif.gif)
+![alt-text](https://github.com/juliapaiva1/Astrobirds/blob/main/gif_jogo.gif)
