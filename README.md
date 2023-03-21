@@ -25,14 +25,14 @@ Uma iminente chuva de meteoros está proxima de atingir a Terra, portanto:
   
 # 4. Física sobre Objetos
 
-| Objeto | Modelo Físico | Gravidade |
+| Objeto | Movimentação | Gravidade |
 | --- | --- | --- |
 | Terra | Fixo na tela | Gera atração gravitacional sobre Meteoros e Raios |
-| Lua | Movimento Circular Uniforme | Gera atração gravitacional oposta (*) |
+| Lua | Movimento Circular Uniforme | Gera atração gravitacional oposta (1) |
 | Meteoro | Movimento Uniforme Variado | Não gera atração gravitacional |
 | Raio | Movimento Uniforme Variado | Não gera atração gravitacional |
 
-(*) Calcula aceleração sobre objetos como um planeta, porém com uma constante gravitacional negativa. Gerando assim, uma resultante também negativa que repele as partículas de raios e meteoros.
+(1) Calcula aceleração sobre objetos como um planeta, porém com uma constante gravitacional negativa. Gerando assim, uma resultante também negativa que repele as partículas de raios e meteoros.
  
 # 5. GIF do jogo
 
